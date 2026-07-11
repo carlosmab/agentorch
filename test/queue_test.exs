@@ -17,4 +17,10 @@ defmodule Agentorch.QueueTest do
     assert {:error, :unknown_capability} = Queue.push(:sms, %{})
   end
 
+  test "normalize_capabilities converts a list to a map keyed by name" do
+    config = %Config{capabilities: [%Capability{name: :email}]}
+    normalized = Config.normalize_capabilities(config)
+    assert normalized.capabilities == %{email: %Capability{name: :email}}
+  end
+
 end
